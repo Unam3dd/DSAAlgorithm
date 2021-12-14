@@ -20,7 +20,7 @@ stack_t	*create_void_stack(void)
 	return (ptr);
 }
 
-stack_t *create_few_stack(int n)
+stack_t *create_few_stack(size_t n)
 {
 	if (!n || n < 0)
 		return (NULL);
@@ -29,7 +29,7 @@ stack_t *create_few_stack(int n)
 	stack_t *save = ptr;
 
 	for (int i = 1; i < n; i++) {
-		ptr->next = (stack_t *) (ptr + i * 24);
+		ptr->next = (stack_t *) (ptr + i * sizeof(stack_t));
 		ptr = ptr->next;
 	}
 

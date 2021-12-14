@@ -1,5 +1,5 @@
 #pragma once
-#include <stdint.h>
+#include "types_.h"
 #include <stddef.h>
 
 ///////////////////////////////////////////////
@@ -31,7 +31,7 @@ struct	stack_t
 ////////////////////////////////////////////////
 
 stack_t	*create_void_stack(void);
-stack_t *create_few_stack(int n);
+stack_t *create_few_stack(size_t n);
 stack_t *create_stack(char *data);
 stack_t *get_stack(stack_t *stack, int key);
 stack_t *set_element_in_stack(stack_t *stack, char *data, int key);
