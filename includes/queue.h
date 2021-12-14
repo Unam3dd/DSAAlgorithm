@@ -20,9 +20,8 @@ typedef	struct	queue_t queue_t;
 struct	queue_t
 {
 	queue_t	*next;
-	char	*data;
+	char	*key;
 	callback_t cb;
-	int key;
 };
 
 ///////////////////////////////////////////////
@@ -31,7 +30,7 @@ struct	queue_t
 //
 ////////////////////////////////////////////////
 
-queue_t	*create_queue(char *data, callback_t cb);
+queue_t	*create_queue(char *key, callback_t cb);
 queue_t	*create_void_queue(void);
 queue_t *create_few_queue(size_t n);
 void	enqueue(queue_t **queue, queue_t *new);

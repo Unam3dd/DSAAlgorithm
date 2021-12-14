@@ -49,12 +49,10 @@ stack_t *create_stack(char *data)
 
 stack_t *get_stack(stack_t *stack, int key)
 {
-	stack_t *actual = stack;
-
-	while (stack && key != actual->key)
-		actual = actual->next;
+	while (stack && key != stack->key)
+		stack = stack->next;
 	
-	return (actual);
+	return (stack);
 }
 
 stack_t *set_element_in_stack(stack_t *stack, char *data, int key)
