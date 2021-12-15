@@ -34,7 +34,7 @@ node_t	*create_node(void *data);
 node_t	*create_nodes(size_t n);
 node_t	*nodes_get_by_index(node_t *nodes, size_t index);
 node_t	*node_shift(node_t **nodes);
-node_t 	*node_append(node_t **nodes);
+node_t 	*node_append(node_t **nodes, node_t *new);
 size_t	node_get_size(node_t **nodes);
 void 	destroy_node(node_t *node);
 void	free_all_nodes(node_t **nodes, bool_t opt);

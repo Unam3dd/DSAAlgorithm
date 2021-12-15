@@ -23,7 +23,6 @@ node_t	*create_nodes(size_t n)
 
 	for (int i = 1; i < n; i++) {
 		ptr->data = NULL;
-		ptr->next = NULL;
 		ptr->prev = NULL;
 		ptr->next = (node_t *) (ptr + sizeof(node_t) * i);
 		ptr = ptr->next;
@@ -40,8 +39,32 @@ node_t	*nodes_get_by_index(node_t *nodes, size_t index)
 	return (nodes);
 }
 
-node_t	*node_shift(node_t **nodes);
-node_t 	*node_append(node_t **nodes);
+node_t	*node_shift(node_t **nodes)
+{
+	node_t *next = (*nodes)->next;
+	next->prev = NULL;
+	next->index--;
+
+	free(*nodes);
+
+	*nodes = next;
+
+	return (*nodes);
+}
+
+node_t 	*node_append(node_t **nodes, node_t *new)
+{
+	node_t *actual = *nodes;
+
+	while (actual->next)
+		actual = actual->next;
+	
+	new->next = NULL;
+	new->index = actual->index + 1;
+	new->prev = actual;
+	actual->next = new;
+}
+
 size_t	node_get_size(node_t **nodes);
 
 void 	destroy_node(node_t *node)
