@@ -176,12 +176,7 @@ void	node_pop_back(node_t **nodes)
 
 void	node_swap_front(node_t **nodes)
 {
-	node_t *tmp = *nodes;
-	(*nodes)->next->index--;
-	*nodes = (*nodes)->next;
-	tmp->index++;
-	tmp->prev = (*nodes)->next;
-	(*nodes)->next = tmp;
+	
 }
 
 void	node_swap_back(node_t **nodes)

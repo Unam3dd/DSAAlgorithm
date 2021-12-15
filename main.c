@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include "dsa.h"
 
-
 int main(void)
 {
 	node_t *n = create_node((char *)"hello");
@@ -10,6 +9,8 @@ int main(void)
 
 	node_push_back(&n, n2);
 	node_push_back(&n, n3);
+
+	node_swap_front(&n);
 
 	printf("%s\n", (char *)n->next->data);
 
