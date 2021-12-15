@@ -172,7 +172,36 @@ void	node_pop_back(node_t **nodes)
 	actual->next = NULL;
 }
 
-void	node_swap_front(node_t **nodes);
-void	node_swap_back(node_t **nodes);
-void	node_exchange_value(node_t *node_1, node_t *node_2);
-void	node_reverse(node_t **nodes);
+void	node_swap_front(node_t **nodes)
+{
+	node_t *tmp = *nodes;
+	(*nodes)->next->index--;
+	*nodes = (*nodes)->next;
+	tmp->index++;
+	tmp->prev = (*nodes)->next;
+	(*nodes)->next = tmp;
+}
+
+void	node_swap_back(node_t **nodes)
+{
+	node_t *actual = *nodes;
+	node_t *tmp = NULL;
+
+	while (actual->next->next)
+		actual = actual->next;
+	
+	tmp = actual;
+	
+	actual = actual->next;
+	actual->next = tmp;
+}
+
+void	node_exchange_value(node_t *node_1, node_t *node_2)
+{
+
+}
+
+void	node_reverse(node_t **nodes)
+{
+
+}
