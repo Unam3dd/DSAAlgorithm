@@ -130,7 +130,19 @@ void	node_pop(node_t **nodes)
 	*nodes = next;
 }
 
-void	node_push_back(node_t **nodes, node_t *new);
+void	node_push_back(node_t **nodes, node_t *new)
+{
+	node_t *actual = *nodes;
+
+	while (actual->next)
+		actual = actual->next;
+	
+	new->next = NULL;
+	new->index = actual->index + 1;
+	new->prev = actual;
+	actual->next = new;
+}
+
 void	node_pop_back(node_t **nodes);
 void	node_insert(node_t **nodes, node_t *new, size_t index);
 void	node_swap_front(node_t **nodes);
