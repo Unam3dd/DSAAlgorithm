@@ -14,14 +14,16 @@ void	callback_2_say_hello(void *ptr)
 
 int main(void)
 {
-	queue_t *q = create_queue("sayhello", callback_1_say_hello);
-	queue_t *new = create_queue("sayhello2", callback_2_say_hello);
+	queue_t *q = create_few_queue(2);
 
-	enqueue(&q, new);
+	q->key = "test1";
+	q->cb = callback_1_say_hello;
+
+	set_queue(q->next,"test2", NULL, callback_2_say_hello);
 
 	execute_callback(q);
 
-	destroy_queue(&q, 0);
+	destroy_queue(&q, 1);
 
 	return (0);
 }

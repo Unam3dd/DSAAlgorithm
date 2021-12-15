@@ -29,6 +29,8 @@ stack_t *create_few_stack(size_t n)
 	stack_t *save = ptr;
 
 	for (int i = 1; i < n; i++) {
+		ptr->data = NULL;
+		ptr->key = 0;
 		ptr->next = (stack_t *) (ptr + i * sizeof(stack_t));
 		ptr = ptr->next;
 	}
@@ -80,8 +82,11 @@ size_t	get_stack_size(stack_t *stack)
 
 void	free_stack(stack_t **stack, bool_t opt)
 {
-	if (opt)
-		return(free(*stack));
+	if (opt) {
+		free(*stack);
+		*stack = NULL;
+		return;
+	}
 
 	stack_t *next = NULL;
 

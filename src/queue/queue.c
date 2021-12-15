@@ -37,13 +37,17 @@ queue_t *create_few_queue(size_t n)
 		return (NULL);
 	
 	queue_t *ptr = (queue_t *)malloc(sizeof(queue_t) * n);
+	queue_t *save = ptr;
 
 	for (int i = 1; i < n; i++) {
+		ptr->args = NULL;
+		ptr->cb = NULL;
+		ptr->key = NULL;
 		ptr->next = (queue_t *) (ptr + i * sizeof(queue_t));
 		ptr = ptr->next;
 	}
 
-	return (ptr);
+	return (save);
 }
 
 queue_t *get_queue(queue_t *queue, char *key)
@@ -92,6 +96,12 @@ void	dequeue(queue_t **queue)
 
 void	destroy_queue(queue_t **queue, bool_t opt)
 {
+	if (opt) {
+		free(*queue);
+		*queue = NULL;
+		return;
+	}
+
 	queue_t *next = NULL;
 	
 	while (*queue) {
