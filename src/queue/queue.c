@@ -75,8 +75,6 @@ void	execute_callback(queue_t *queue)
 	}
 }
 
-
-
 void	enqueue(queue_t **queue, queue_t *new)
 {
 	new->next = *queue;

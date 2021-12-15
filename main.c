@@ -2,28 +2,17 @@
 #include <stdio.h>
 #include "dsa.h"
 
-void	callback_1_say_hello(void *ptr)
-{
-	printf("Hello\n");
-}
-
-void	callback_2_say_hello(void *ptr)
-{
-	printf("world\n");
-}
 
 int main(void)
 {
-	queue_t *q = create_few_queue(2);
+	circular_queue_t *cq = create_circular_queue("hello", "world");
+	circular_queue_t *new_q = create_circular_queue("hello2", "world2");
 
-	q->key = "test1";
-	q->cb = callback_1_say_hello;
+	circular_enqueue(&cq, new_q);
 
-	set_queue(q->next,"test2", NULL, callback_2_say_hello);
+	printf("%s\n%s\n", cq->data, cq->next->next->data);
 
-	execute_callback(q);
-
-	destroy_queue(&q, 1);
+	circular_destroy_queue(&cq, 0, 2);
 
 	return (0);
 }
