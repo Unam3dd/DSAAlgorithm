@@ -80,6 +80,24 @@ size_t	node_get_size(node_t *nodes)
 	return (i);
 }
 
+bool_t	node_insert(node_t **nodes, node_t *new, size_t index)
+{
+	node_t *actual = *nodes;
+
+	while (actual && actual->index != index)
+		actual = actual->next;
+	
+	if (!actual)
+		return;
+	
+	new->prev = actual->prev;
+	actual->prev = new;
+	new->index = actual->index;
+	actual->index++;
+	new->next = actual;
+	actual = new;
+}
+
 void 	destroy_node(node_t *node)
 {
 	if (node)
@@ -154,7 +172,6 @@ void	node_pop_back(node_t **nodes)
 	actual->next = NULL;
 }
 
-void	node_insert(node_t **nodes, node_t *new, size_t index);
 void	node_swap_front(node_t **nodes);
 void	node_swap_back(node_t **nodes);
 void	node_exchange_value(node_t *node_1, node_t *node_2);
