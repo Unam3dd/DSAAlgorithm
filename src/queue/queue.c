@@ -1,4 +1,5 @@
 #include "queue.h"
+#include "utils.h"
 #include <stdlib.h>
 
 ///////////////////////////////////////////////
@@ -13,6 +14,7 @@ queue_t	*create_queue(char *key, callback_t cb)
 
 	ptr->next = NULL;
 	ptr->key = key;
+	ptr->args = NULL;
 	ptr->cb = cb;
 
 	return (ptr);
@@ -43,6 +45,32 @@ queue_t *create_few_queue(size_t n)
 
 	return (ptr);
 }
+
+queue_t *get_queue(queue_t *queue, char *key)
+{
+	while (queue && ft_strcmp(key, queue->key))
+		queue = queue->next;
+	
+	return (queue);
+}
+
+queue_t *set_queue(queue_t *queue, char *key, char *args, callback_t cb)
+{
+	queue->key = key;
+	queue->args = args;
+	queue->cb = cb;
+
+	return (queue);
+}
+
+void	execute_callback(queue_t *queue)
+{
+	while (queue) {
+		queue->cb(queue->args);
+		queue = queue->next;
+	}
+}
+
 
 
 void	enqueue(queue_t **queue, queue_t *new)

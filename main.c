@@ -2,20 +2,26 @@
 #include <stdio.h>
 #include "dsa.h"
 
-void	say_hello(void *args)
+void	callback_1_say_hello(void *ptr)
 {
-	printf("%s\n", (char *) args);
-	
-	return;
+	printf("Hello\n");
+}
+
+void	callback_2_say_hello(void *ptr)
+{
+	printf("world\n");
 }
 
 int main(void)
 {
-	queue_t *q = create_queue("sayhello", say_hello);
+	queue_t *q = create_queue("sayhello", callback_1_say_hello);
+	queue_t *new = create_queue("sayhello2", callback_2_say_hello);
 
-	q->cb((char *) "hello");
+	enqueue(&q, new);
 
-	free(q);
+	execute_callback(q);
+
+	destroy_queue(&q, 0);
 
 	return (0);
 }
