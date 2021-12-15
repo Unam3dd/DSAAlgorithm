@@ -62,10 +62,23 @@ node_t 	*node_append(node_t **nodes, node_t *new)
 	new->next = NULL;
 	new->index = actual->index + 1;
 	new->prev = actual;
+
 	actual->next = new;
+
+	return (actual->next);
 }
 
-size_t	node_get_size(node_t **nodes);
+size_t	node_get_size(node_t *nodes)
+{
+	int i = 0;
+
+	while (nodes) {
+		nodes = nodes->next;
+		i++;
+	}
+
+	return (i);
+}
 
 void 	destroy_node(node_t *node)
 {
@@ -91,8 +104,32 @@ void	free_all_nodes(node_t **nodes, bool_t opt)
 	*nodes = NULL;
 }
 
-void	node_push(node_t **nodes, node_t *new);
-void	node_pop(node_t **nodes);
+///////////////////////////////////////////////
+//
+//           NODE LIFO FUNCTIONS
+//
+////////////////////////////////////////////////
+
+void	node_push(node_t **nodes, node_t *new)
+{
+	new->prev = NULL;
+	(*nodes)->index++;
+	new->next = *nodes;
+	*nodes = new;
+}
+
+void	node_pop(node_t **nodes)
+{
+	node_t *next = (*nodes)->next;
+
+	next->prev = NULL;
+	next->index--;
+
+	free(*nodes);
+
+	*nodes = next;
+}
+
 void	node_push_back(node_t **nodes, node_t *new);
 void	node_pop_back(node_t **nodes);
 void	node_insert(node_t **nodes, node_t *new, size_t index);
