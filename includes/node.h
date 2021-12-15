@@ -45,5 +45,4 @@ void	node_push_back(node_t **nodes, node_t *new);
 void	node_pop_back(node_t **nodes);
 void	node_swap_front(node_t **nodes);
 void	node_swap_back(node_t **nodes);
-void	node_exchange_value(node_t *node_1, node_t *node_2);
 void	node_reverse(node_t **nodes);

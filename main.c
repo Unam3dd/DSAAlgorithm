@@ -4,14 +4,16 @@
 
 int main(void)
 {
-	circular_queue_t *cq = create_circular_queue("hello", "world");
-	circular_queue_t *new_q = create_circular_queue("hello2", "world2");
+	node_t *n = create_node((char *)"hello");
+	node_t *n2 = create_node((char *)"world");
+	node_t *n3 = create_node((char *)" and im beautiful but lil");
 
-	circular_enqueue(&cq, new_q);
+	node_push_back(&n, n2);
+	node_push_back(&n, n3);
 
-	printf("%s\n%s\n", cq->data, cq->next->next->data);
+	printf("%s\n", (char *)n->next->data);
 
-	circular_destroy_queue(&cq, 0, 2);
+	free_all_nodes(&n, 0);
 
 	return (0);
 }

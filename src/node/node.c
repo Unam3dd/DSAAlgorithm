@@ -88,7 +88,7 @@ bool_t	node_insert(node_t **nodes, node_t *new, size_t index)
 		actual = actual->next;
 	
 	if (!actual)
-		return;
+		return (1);
 	
 	new->prev = actual->prev;
 	actual->prev = new;
@@ -96,6 +96,8 @@ bool_t	node_insert(node_t **nodes, node_t *new, size_t index)
 	actual->index++;
 	new->next = actual;
 	actual = new;
+
+	return (0);
 }
 
 void 	destroy_node(node_t *node)
@@ -184,24 +186,10 @@ void	node_swap_front(node_t **nodes)
 
 void	node_swap_back(node_t **nodes)
 {
-	node_t *actual = *nodes;
-	node_t *tmp = NULL;
-
-	while (actual->next->next)
-		actual = actual->next;
-	
-	tmp = actual;
-	
-	actual = actual->next;
-	actual->next = tmp;
-}
-
-void	node_exchange_value(node_t *node_1, node_t *node_2)
-{
-
+	return;
 }
 
 void	node_reverse(node_t **nodes)
 {
-
+	return;
 }
