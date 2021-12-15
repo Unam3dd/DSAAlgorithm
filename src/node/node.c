@@ -32,7 +32,14 @@ node_t	*create_nodes(size_t n)
 	return (save);
 }
 
-node_t	*nodes_get_by_index(node_t **nodes, size_t index);
+node_t	*nodes_get_by_index(node_t *nodes, size_t index)
+{
+	while (nodes && nodes->index != index)
+		nodes = nodes->next;
+	
+	return (nodes);
+}
+
 node_t	*node_shift(node_t **nodes);
 node_t 	*node_append(node_t **nodes);
 size_t	node_get_size(node_t **nodes);
