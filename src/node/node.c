@@ -96,6 +96,8 @@ bool_t	node_insert(node_t **nodes, node_t *new, size_t index)
 	new->prev = actual->prev;
 	actual->prev->next = new;
 	next->prev = new;
+	new->index = actual->index;
+	next->index++;
 
 	return (0);
 }

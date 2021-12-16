@@ -16,7 +16,7 @@ int main(void)
 	if (node_insert(&n, n4, 1))
 		fprintf(stderr, "[-] Error insert nodes !\n");
 
-	printf("%s\n", (char *)n->next->data);
+	printf("%ld\n", n->next->next->index);
 
 	free_all_nodes(&n, 0);
 
