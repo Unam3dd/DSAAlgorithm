@@ -83,6 +83,7 @@ size_t	node_get_size(node_t *nodes)
 bool_t	node_insert(node_t **nodes, node_t *new, size_t index)
 {
 	node_t *actual = *nodes;
+	node_t *next = NULL;
 
 	while (actual && actual->index != index)
 		actual = actual->next;
@@ -90,12 +91,11 @@ bool_t	node_insert(node_t **nodes, node_t *new, size_t index)
 	if (!actual)
 		return (1);
 	
+	next = actual;
+	new->next = next;
 	new->prev = actual->prev;
-	actual->prev = new;
-	new->index = actual->index;
-	actual->index++;
-	new->next = actual;
-	actual = new;
+	actual->prev->next = new;
+	next->prev = new;
 
 	return (0);
 }
@@ -201,12 +201,13 @@ void	node_swap_back(node_t **nodes)
 	
 	first = actual;
 	next = actual->next;
-	
+	first->index++;
 	first->prev->next = next;
 	next->prev = first->prev;
 	first->prev = next;
 	first->next = next->next;
 	next->next = first;
+	next->index--;
 
 	actual = next;
 }
