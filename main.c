@@ -10,9 +10,9 @@ int main(void)
 	node_push_back(&n, n2);
 	node_push_back(&n, n3);
 
-	node_swap_front(&n);
+	node_swap_back(&n);
 
-	printf("%s\n", (char *)n->next->next->data);
+	printf("%s\n", (char *)n->next->data);
 
 	free_all_nodes(&n, 0);
 

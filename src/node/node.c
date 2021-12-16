@@ -191,7 +191,24 @@ void	node_swap_front(node_t **nodes)
 
 void	node_swap_back(node_t **nodes)
 {
-	return;
+	node_t *actual = *nodes;
+	node_t *first = NULL;
+	node_t *next = NULL;
+
+
+	while (actual->next->next)
+		actual = actual->next;
+	
+	first = actual;
+	next = actual->next;
+	
+	first->prev->next = next;
+	next->prev = first->prev;
+	first->prev = next;
+	first->next = next->next;
+	next->next = first;
+
+	actual = next;
 }
 
 void	node_reverse(node_t **nodes)
