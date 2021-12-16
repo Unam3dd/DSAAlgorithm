@@ -12,7 +12,7 @@ int main(void)
 
 	node_swap_front(&n);
 
-	printf("%s\n", (char *)n->next->data);
+	printf("%s\n", (char *)n->next->next->data);
 
 	free_all_nodes(&n, 0);
 
