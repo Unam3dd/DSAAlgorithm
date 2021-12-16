@@ -1,5 +1,6 @@
 #include "node.h"
 #include <stdlib.h>
+#include <stdio.h>
 
 node_t	*create_node(void *data)
 {
@@ -216,5 +217,33 @@ void	node_swap_back(node_t **nodes)
 
 void	node_reverse(node_t **nodes)
 {
-	return;
+	node_t *end = (*nodes)->next;
+	node_t *first = *nodes;
+	node_t *tmp = NULL;
+	node_t *next = NULL;
+
+	if (!end)
+		return;
+
+	while (end->next)
+		end = end->next;
+	
+	tmp = end;
+	first->prev = first->next;
+	first->next = NULL;
+	end = first;
+	first = tmp;
+
+	node_t *save = first;
+	first->next = first->prev;
+
+	while (first->next) {
+		next = first->next;
+		first->next = first->prev;
+		first->prev = next;
+		first = first->next;
+	}
+
+	first = save;
+	*nodes = first;
 }
