@@ -234,8 +234,9 @@ void	node_reverse(node_t **nodes)
 	end = first;
 	first = tmp;
 
-	node_t *save = first;
+	tmp = first;
 	first->next = first->prev;
+	first->index++;
 
 	while (first->next) {
 		next = first->next;
@@ -244,6 +245,5 @@ void	node_reverse(node_t **nodes)
 		first = first->next;
 	}
 
-	first = save;
-	*nodes = first;
+	*nodes = tmp;
 }
